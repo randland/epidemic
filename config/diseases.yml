@@ -1,0 +1,17 @@
+---
+:black:
+  :available: 24
+  :cured: false
+  :eradicated: false
+:blue:
+  :available: 24
+  :cured: false
+  :eradicated: false
+:red:
+  :available: 24
+  :cured: false
+  :eradicated: false
+:yellow:
+  :available: 24
+  :cured: false
+  :eradicated: false

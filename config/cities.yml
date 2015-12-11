@@ -1,0 +1,378 @@
+---
+san_francisco:
+  :name: San Francisco
+  :color: blue
+  :connections:
+  - manila
+  - tokyo
+  - los_angeles
+  - chicago
+chicago:
+  :name: Chicago
+  :color: blue
+  :connections:
+  - san_francisco
+  - los_angeles
+  - mexico_city
+  - atlanta
+  - montreal
+atlanta:
+  :name: Atlanta
+  :color: blue
+  :connections:
+  - chicago
+  - miami
+  - washington
+montreal:
+  :name: Montreal
+  :color: blue
+  :connections:
+  - chicago
+  - washington
+  - new_york
+washington:
+  :name: Washington
+  :color: blue
+  :connections:
+  - atlanta
+  - montreal
+  - new_york
+  - miami
+new_york:
+  :name: New York
+  :color: blue
+  :connections:
+  - montreal
+  - washington
+  - london
+  - madrid
+london:
+  :name: London
+  :color: blue
+  :connections:
+  - new_york
+  - madrid
+  - paris
+  - essen
+madrid:
+  :name: Madrid
+  :color: blue
+  :connections:
+  - new_york
+  - sao_paulo
+  - london
+  - paris
+  - algiers
+paris:
+  :name: Paris
+  :color: blue
+  :connections:
+  - london
+  - madrid
+  - algiers
+  - essen
+  - milan
+essen:
+  :name: Essen
+  :color: blue
+  :connections:
+  - london
+  - paris
+  - milan
+  - st_petersburg
+milan:
+  :name: Milan
+  :color: blue
+  :connections:
+  - essen
+  - paris
+  - istanbul
+st_petersburg:
+  :name: St Petersburg
+  :color: blue
+  :connections:
+  - essen
+  - istanbul
+  - moscow
+los_angeles:
+  :name: Los Angeles
+  :color: yellow
+  :connections:
+  - sydney
+  - san_francisco
+  - chicago
+  - mexico_city
+mexico_city:
+  :name: Mexico City
+  :color: yellow
+  :connections:
+  - los_angeles
+  - chicago
+  - miami
+  - bogota
+  - lima
+miami:
+  :name: Miami
+  :color: yellow
+  :connections:
+  - mexico_city
+  - atlanta
+  - bogota
+  - washington
+bogota:
+  :name: Bogota
+  :color: yellow
+  :connections:
+  - mexico_city
+  - miami
+  - lima
+  - buenos_aires
+  - sao_paulo
+lima:
+  :name: Lima
+  :color: yellow
+  :connections:
+  - mexico_city
+  - santiago
+  - bogota
+santiago:
+  :name: Santiago
+  :color: yellow
+  :connections:
+  - lima
+buenos_aires:
+  :name: Buenos Aires
+  :color: yellow
+  :connections:
+  - bogota
+  - sao_paulo
+sao_paulo:
+  :name: Sao Paulo
+  :color: yellow
+  :connections:
+  - bogota
+  - buenos_aires
+  - madrid
+  - lagos
+lagos:
+  :name: Lagos
+  :color: yellow
+  :connections:
+  - sao_paulo
+  - kinshasa
+  - khartoum
+khartoum:
+  :name: Khartoum
+  :color: yellow
+  :connections:
+  - lagos
+  - kinshasa
+  - johannesburg
+  - cairo
+kinshasa:
+  :name: Kinshasa
+  :color: yellow
+  :connections:
+  - lagos
+  - khartoum
+  - johannesburg
+johannesburg:
+  :name: Johannesburg
+  :color: yellow
+  :connections:
+  - kinshasa
+  - khartoum
+algiers:
+  :name: Algiers
+  :color: black
+  :connections:
+  - madrid
+  - paris
+  - istanbul
+  - cairo
+istanbul:
+  :name: Istanbul
+  :color: black
+  :connections:
+  - milan
+  - st_petersburg
+  - moscow
+  - baghdad
+  - cairo
+  - algiers
+moscow:
+  :name: Moscow
+  :color: black
+  :connections:
+  - st_petersburg
+  - istanbul
+  - tehran
+cairo:
+  :name: Cairo
+  :color: black
+  :connections:
+  - algiers
+  - khartoum
+  - istanbul
+  - baghdad
+  - riyadh
+baghdad:
+  :name: Baghdad
+  :color: black
+  :connections:
+  - istanbul
+  - tehran
+  - karachi
+  - riyadh
+  - cairo
+tehran:
+  :name: Tehran
+  :color: black
+  :connections:
+  - moscow
+  - baghdad
+  - karachi
+  - delhi
+riyadh:
+  :name: Riyadh
+  :color: black
+  :connections:
+  - cairo
+  - baghdad
+  - karachi
+karachi:
+  :name: Karachi
+  :color: black
+  :connections:
+  - baghdad
+  - tehran
+  - delhi
+  - mumbai
+  - riyadh
+delhi:
+  :name: Delhi
+  :color: black
+  :connections:
+  - tehran
+  - karachi
+  - mumbai
+  - chennai
+  - kolkata
+mumbai:
+  :name: Mumbai
+  :color: black
+  :connections:
+  - karachi
+  - chennai
+  - delhi
+kolkata:
+  :name: Kolkata
+  :color: black
+  :connections:
+  - delhi
+  - chennai
+  - bangkok
+  - hong_kong
+chennai:
+  :name: Chennai
+  :color: black
+  :connections:
+  - mumbai
+  - delhi
+  - kolkata
+  - bangkok
+  - jakarta
+bangkok:
+  :name: Bangkok
+  :color: red
+  :connections:
+  - kolkata
+  - chennai
+  - jakarta
+  - ho_chi_minh_city
+  - hong_kong
+jakarta:
+  :name: Jakarta
+  :color: red
+  :connections:
+  - chennai
+  - bangkok
+  - ho_chi_minh_city
+  - sydney
+ho_chi_minh_city:
+  :name: Ho Chi Minh City
+  :color: red
+  :connections:
+  - bangkok
+  - jakarta
+  - hong_kong
+  - manila
+hong_kong:
+  :name: Hong Kong
+  :color: red
+  :connections:
+  - kolkata
+  - bangkok
+  - ho_chi_minh_city
+  - manila
+  - taipei
+manila:
+  :name: Manila
+  :color: red
+  :connections:
+  - sydney
+  - ho_chi_minh_city
+  - hong_kong
+  - taipei
+  - san_francisco
+sydney:
+  :name: Sydney
+  :color: red
+  :connections:
+  - jakarta
+  - manila
+  - los_angeles
+taipei:
+  :name: Taipei
+  :color: red
+  :connections:
+  - hong_kong
+  - manila
+  - osaka
+  - shanghai
+osaka:
+  :name: Osaka
+  :color: red
+  :connections:
+  - taipei
+  - tokyo
+tokyo:
+  :name: Tokyo
+  :color: red
+  :connections:
+  - san_francisco
+  - osaka
+  - seoul
+  - shanghai
+shanghai:
+  :name: Shanghai
+  :color: red
+  :connections:
+  - bejing
+  - seoul
+  - tokyo
+  - taipei
+  - hong_kong
+bejing:
+  :name: Bejing
+  :color: red
+  :connections:
+  - shanghai
+  - seoul
+seoul:
+  :name: Seoul
+  :color: red
+  :connections:
+  - bejing
+  - shanghai
+  - tokyo

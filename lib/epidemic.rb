@@ -2,10 +2,11 @@ require "epidemic/version"
 
 require "hashie"
 
-require "epidemic/gamestate"
-require "epidemic/factories/gamestate_factory"
-
 module Epidemic
+  def self.load_yaml_config(filename)
+    YAML.load_file(File.expand_path("../../config/#{filename}.yml", __FILE__))
+  end
+
   def self.is_truthy?(val)
     case val
     when String then !!(val =~ /^(true|t|yes|y|1)$/i)
@@ -45,4 +46,7 @@ module Epidemic
     end
   end
 end
+
+require "epidemic/gamestate"
+require "epidemic/factories/gamestate_factory"
 
