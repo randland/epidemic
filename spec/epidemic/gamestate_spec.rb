@@ -27,29 +27,36 @@ describe Epidemic::Gamestate do
 
       context "passed an override hash" do
         context "containing a hash of cities" do
-          let(:options) { {cities: {madison: {}}} }
+          let(:options) do
+            { cities:
+              { madison: {color: :blue}
+              }
+            }
+          end
+
           it "creates the overridden cities" do
             expect(subject.count).to eq 1
             expect(subject.madison).to be_a_kind_of Epidemic::City
             expect(subject.madison.tag).to eq :madison
+            expect(subject.madison.color).to eq :blue
           end
         end
 
         context "containing an array of hashes of cities" do
-          let(:options) { {cities: [{tag: :madison}] } }
-          it "creates the overridden cities" do
-            expect(subject.count).to eq 1
-            expect(subject.madison).to be_a_kind_of Epidemic::City
-            expect(subject.madison.tag).to eq :madison
+          let(:options) do
+            { cities:
+              [
+                { tag: 'madison',
+                  color: 'blue'}
+              ]
+            }
           end
-        end
 
-        context "containing an array of city tags" do
-          let(:options) { {cities: ['madison'] } }
           it "creates the overridden cities" do
             expect(subject.count).to eq 1
             expect(subject.madison).to be_a_kind_of Epidemic::City
             expect(subject.madison.tag).to eq :madison
+            expect(subject.madison.color).to eq :blue
           end
         end
       end
@@ -70,7 +77,13 @@ describe Epidemic::Gamestate do
 
       context "passed an override hash" do
         context "containing a hash of diseases" do
-          let(:options) { {diseases: {green: {}}} }
+          let(:options) do
+            { diseases:
+              { green: {}
+              }
+            }
+          end
+
           it "creates the overridden diseases" do
             expect(subject.count).to eq 1
             expect(subject.green).to be_a_kind_of Epidemic::Disease
@@ -79,7 +92,14 @@ describe Epidemic::Gamestate do
         end
 
         context "containing an array of hashes of diseases" do
-          let(:options) { {diseases: [{color: :green}] } }
+          let(:options) do
+            { diseases:
+              [
+                { color: :green }
+              ]
+            }
+          end
+
           it "creates the overridden diseases" do
             expect(subject.count).to eq 1
             expect(subject.green).to be_a_kind_of Epidemic::Disease
@@ -88,7 +108,13 @@ describe Epidemic::Gamestate do
         end
 
         context "containing an array of disease colors" do
-          let(:options) { {diseases: [:green] } }
+          let(:options) do
+            { diseases:
+              [ :green
+              ]
+            }
+          end
+
           it "creates the overridden diseases" do
             expect(subject.count).to eq 1
             expect(subject.green).to be_a_kind_of Epidemic::Disease
@@ -97,7 +123,16 @@ describe Epidemic::Gamestate do
         end
 
         context "containing a hash of diseases with overrides" do
-          let(:options) { {diseases: {green: {available: '36', cured: '1'}}} }
+          let(:options) do
+            { diseases:
+              { green:
+                { available: '36',
+                  cured: '1'
+                }
+              }
+            }
+          end
+
           it "creates the overridden diseases" do
             expect(subject.count).to eq 1
             expect(subject.green).to be_a_kind_of Epidemic::Disease

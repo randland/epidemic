@@ -11,52 +11,52 @@ Feature: Gamestate initialization
       | red    | 24        | false | false      |
       | yellow | 24        | false | false      |
     And the current gamestate should have the following cities:
-      | Tag              |
-      | algiers          |
-      | atlanta          |
-      | baghdad          |
-      | bangkok          |
-      | bejing           |
-      | bogota           |
-      | buenos_aires     |
-      | cairo            |
-      | chennai          |
-      | chicago          |
-      | delhi            |
-      | essen            |
-      | ho_chi_minh_city |
-      | hong_kong        |
-      | istanbul         |
-      | jakarta          |
-      | johannesburg     |
-      | karachi          |
-      | khartoum         |
-      | kinshasa         |
-      | kolkata          |
-      | lagos            |
-      | lima             |
-      | london           |
-      | los_angeles      |
-      | madrid           |
-      | manila           |
-      | mexico_city      |
-      | miami            |
-      | milan            |
-      | montreal         |
-      | moscow           |
-      | mumbai           |
-      | new_york         |
-      | osaka            |
-      | paris            |
-      | riyadh           |
-      | san_francisco    |
-      | santiago         |
-      | sao_paulo        |
-      | seoul            |
-      | shanghai         |
-      | st_petersburg    |
-      | sydney           |
-      | taipei           |
-      | tehran           |
-      | tokyo            |
-      | washington       |
+      | Tag              | Color  |
+      | algiers          | black  |
+      | atlanta          | blue   |
+      | baghdad          | black  |
+      | bangkok          | red    |
+      | bejing           | red    |
+      | bogota           | yellow |
+      | buenos_aires     | yellow |
+      | cairo            | black  |
+      | chennai          | black  |
+      | chicago          | blue   |
+      | delhi            | black  |
+      | essen            | blue   |
+      | ho_chi_minh_city | red    |
+      | hong_kong        | red    |
+      | istanbul         | black  |
+      | jakarta          | red    |
+      | johannesburg     | yellow |
+      | karachi          | black  |
+      | khartoum         | yellow |
+      | kinshasa         | yellow |
+      | kolkata          | black  |
+      | lagos            | yellow |
+      | lima             | yellow |
+      | london           | blue   |
+      | los_angeles      | yellow |
+      | madrid           | blue   |
+      | manila           | red    |
+      | mexico_city      | yellow |
+      | miami            | yellow |
+      | milan            | blue   |
+      | montreal         | blue   |
+      | moscow           | black  |
+      | mumbai           | black  |
+      | new_york         | blue   |
+      | osaka            | red    |
+      | paris            | blue   |
+      | riyadh           | black  |
+      | san_francisco    | blue   |
+      | santiago         | yellow |
+      | sao_paulo        | yellow |
+      | seoul            | red    |
+      | shanghai         | red    |
+      | st_petersburg    | blue   |
+      | sydney           | red    |
+      | taipei           | red    |
+      | tehran           | black  |
+      | tokyo            | red    |
+      | washington       | blue   |

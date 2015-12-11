@@ -5,6 +5,9 @@ module Epidemic
     property :tag,
       required: true,
       coerce: Symbol
+    property :color,
+      required: true,
+      coerce: Symbol
   end
 end
 
