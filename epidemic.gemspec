@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
 
   spec.add_runtime_dependency "hashie"
+  spec.add_runtime_dependency "activesupport"
 end
