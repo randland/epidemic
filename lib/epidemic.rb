@@ -6,6 +6,14 @@ require "epidemic/gamestate"
 require "epidemic/factories/gamestate_factory"
 
 module Epidemic
+  def self.is_truthy?(val)
+    case val
+    when String then !!(val =~ /^(true|t|yes|y|1)$/i)
+    when Numeric then !([-1,0].include? val.to_i)
+    else val == true
+    end
+  end
+
   def self.coerce_objects(val, to: Hashie::Mash, via: :tag)
     case val
     when Array then coerce_objects_from_array val, to: to, via: via

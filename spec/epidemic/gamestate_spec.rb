@@ -47,7 +47,19 @@ describe Epidemic::Gamestate do
             expect(subject.green.color).to eq :green
           end
         end
+
+        context "containing a hash of diseases with overrides" do
+          let(:options) { {diseases: {green: {available: '36', cured: '1'}}} }
+          it "creates the overridden diseases" do
+            expect(subject.count).to eq 1
+            expect(subject.green).to be_a_kind_of Epidemic::Disease
+            expect(subject.green.color).to eq :green
+            expect(subject.green.available).to eq 36
+            expect(subject.green.cured).to eq true
+          end
+        end
       end
     end
   end
 end
+

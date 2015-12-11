@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 class TestCoercedObject < Hashie::Dash
   include Hashie::Extensions::Dash::Coercion
@@ -7,11 +7,60 @@ class TestCoercedObject < Hashie::Dash
 end
 
 describe Epidemic do
-  it 'has a version number' do
+  it "has a version number" do
     expect(Epidemic::VERSION).not_to be nil
   end
 
-  context "object coercion" do
+  context ".is_truthy?" do
+    it "detects booleans" do
+      expect(Epidemic.is_truthy? false).to be false
+
+      expect(Epidemic.is_truthy? true).to be true
+    end
+
+    it "detects integers" do
+      expect(Epidemic.is_truthy? -1).to be false
+      expect(Epidemic.is_truthy? 0).to be false
+      expect(Epidemic.is_truthy? 0.1).to be false
+
+      expect(Epidemic.is_truthy? 1).to be true
+      expect(Epidemic.is_truthy? 1.1).to be true
+      expect(Epidemic.is_truthy? 2).to be true
+    end
+
+    it "detects strings" do
+      expect(Epidemic.is_truthy? 'false').to be false
+      expect(Epidemic.is_truthy? 'False').to be false
+      expect(Epidemic.is_truthy? 'FALSE').to be false
+      expect(Epidemic.is_truthy? 'f').to be false
+      expect(Epidemic.is_truthy? 'F').to be false
+      expect(Epidemic.is_truthy? 'no').to be false
+      expect(Epidemic.is_truthy? 'No').to be false
+      expect(Epidemic.is_truthy? 'NO').to be false
+      expect(Epidemic.is_truthy? 'n').to be false
+      expect(Epidemic.is_truthy? 'N').to be false
+      expect(Epidemic.is_truthy? '0').to be false
+      expect(Epidemic.is_truthy? 'xyz').to be false
+
+      expect(Epidemic.is_truthy? 'true').to be true
+      expect(Epidemic.is_truthy? 'True').to be true
+      expect(Epidemic.is_truthy? 'TRUE').to be true
+      expect(Epidemic.is_truthy? 't').to be true
+      expect(Epidemic.is_truthy? 'T').to be true
+      expect(Epidemic.is_truthy? 'yes').to be true
+      expect(Epidemic.is_truthy? 'Yes').to be true
+      expect(Epidemic.is_truthy? 'YES').to be true
+      expect(Epidemic.is_truthy? 'y').to be true
+      expect(Epidemic.is_truthy? 'Y').to be true
+      expect(Epidemic.is_truthy? '1').to be true
+    end
+
+    it "detects nil" do
+      expect(Epidemic.is_truthy? nil).to be false
+    end
+  end
+
+  context ".coerce_objects" do
     subject { Epidemic.coerce_objects objects_to_coerce, to: TestCoercedObject, via: :tag }
 
     context "passed a nil object" do
