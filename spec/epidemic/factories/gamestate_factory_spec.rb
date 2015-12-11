@@ -14,3 +14,4 @@ describe Epidemic::Factories::GamestateFactory do
     end
   end
 end
+

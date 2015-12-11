@@ -4,4 +4,9 @@ Feature: Gamestate initialization
 
   Scenario: Default game
     Given I have a new default gamestate
-
+    Then the current gamestate should have the following diseases:
+      | Color  |
+      | black  |
+      | blue   |
+      | red    |
+      | yellow |
