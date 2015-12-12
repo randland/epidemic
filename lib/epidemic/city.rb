@@ -1,7 +1,5 @@
 module Epidemic
-  class City < Hashie::Dash
-    include Hashie::Extensions::Dash::Coercion
-
+  class City < DataModel
     property :tag,
       required: true,
       coerce: Symbol
@@ -18,7 +16,7 @@ module Epidemic
       coerce: Array[Symbol]
 
     def name
-      self[:name] ||= tag.to_s.split("_").map(&:downcase).map(&:capitalize).join(' ')
+      self[:name] ||= tag.to_s.titleize
     end
   end
 end

@@ -1,7 +1,5 @@
 module Epidemic
-  class Disease < Hashie::Dash
-    include Hashie::Extensions::Dash::Coercion
-
+  class Disease < DataModel
     property :color,
       required: true,
       coerce: Symbol
@@ -13,10 +11,10 @@ module Epidemic
 
     property :cured,
       default: false,
-      coerce: ->(val) { Epidemic.is_truthy? val }
+      coerce: ->(val) { is_truthy? val }
 
     property :eradicated,
       default: false,
-      coerce: ->(val) { Epidemic.is_truthy? val }
+      coerce: ->(val) { is_truthy? val }
   end
 end
