@@ -5,53 +5,33 @@ class TestCoercedObject < Epidemic::DataModel
   property :name
 end
 
+def expect_truthy(val)
+  expect(described_class.is_truthy? val).to be true
+end
+
+def expect_falsey(val)
+  expect(described_class.is_truthy? val).to be false
+end
+
 describe Epidemic::DataModel do
   describe ".is_truthy?" do
     it "detects booleans" do
-      expect(described_class.is_truthy? false).to be false
-
-      expect(described_class.is_truthy? true).to be true
+      expect_truthy true
+      expect_falsey false
     end
 
     it "detects integers" do
-      expect(described_class.is_truthy? -1).to be false
-      expect(described_class.is_truthy? 0).to be false
-      expect(described_class.is_truthy? 0.1).to be false
-
-      expect(described_class.is_truthy? 1).to be true
-      expect(described_class.is_truthy? 1.1).to be true
-      expect(described_class.is_truthy? 2).to be true
+      [-1, 0, 0.1].each {|val| expect_falsey val}
+      [1, 1.1, 2].each {|val| expect_truthy val}
     end
 
     it "detects strings" do
-      expect(described_class.is_truthy? 'false').to be false
-      expect(described_class.is_truthy? 'False').to be false
-      expect(described_class.is_truthy? 'FALSE').to be false
-      expect(described_class.is_truthy? 'f').to be false
-      expect(described_class.is_truthy? 'F').to be false
-      expect(described_class.is_truthy? 'no').to be false
-      expect(described_class.is_truthy? 'No').to be false
-      expect(described_class.is_truthy? 'NO').to be false
-      expect(described_class.is_truthy? 'n').to be false
-      expect(described_class.is_truthy? 'N').to be false
-      expect(described_class.is_truthy? '0').to be false
-      expect(described_class.is_truthy? 'xyz').to be false
-
-      expect(described_class.is_truthy? 'true').to be true
-      expect(described_class.is_truthy? 'True').to be true
-      expect(described_class.is_truthy? 'TRUE').to be true
-      expect(described_class.is_truthy? 't').to be true
-      expect(described_class.is_truthy? 'T').to be true
-      expect(described_class.is_truthy? 'yes').to be true
-      expect(described_class.is_truthy? 'Yes').to be true
-      expect(described_class.is_truthy? 'YES').to be true
-      expect(described_class.is_truthy? 'y').to be true
-      expect(described_class.is_truthy? 'Y').to be true
-      expect(described_class.is_truthy? '1').to be true
+      %w(false False FALSE f F no No NO n N 0 xyz).each {|val| expect_falsey val}
+      %w(true True TRUE t T yes Yes YES y Y 1).each {|val| expect_truthy val}
     end
 
     it "detects nil" do
-      expect(described_class.is_truthy? nil).to be false
+      expect_falsey nil
     end
   end
 
