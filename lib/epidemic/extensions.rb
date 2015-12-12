@@ -1,0 +1,1 @@
+require 'epidemic/extensions/string'
