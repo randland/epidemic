@@ -6,58 +6,57 @@ class TestCoercedObject < Epidemic::DataModel
 end
 
 describe Epidemic::DataModel do
-  let(:test_class) { Epidemic::DataModel }
   describe ".is_truthy?" do
     it "detects booleans" do
-      expect(test_class.is_truthy? false).to be false
+      expect(described_class.is_truthy? false).to be false
 
-      expect(test_class.is_truthy? true).to be true
+      expect(described_class.is_truthy? true).to be true
     end
 
     it "detects integers" do
-      expect(test_class.is_truthy? -1).to be false
-      expect(test_class.is_truthy? 0).to be false
-      expect(test_class.is_truthy? 0.1).to be false
+      expect(described_class.is_truthy? -1).to be false
+      expect(described_class.is_truthy? 0).to be false
+      expect(described_class.is_truthy? 0.1).to be false
 
-      expect(test_class.is_truthy? 1).to be true
-      expect(test_class.is_truthy? 1.1).to be true
-      expect(test_class.is_truthy? 2).to be true
+      expect(described_class.is_truthy? 1).to be true
+      expect(described_class.is_truthy? 1.1).to be true
+      expect(described_class.is_truthy? 2).to be true
     end
 
     it "detects strings" do
-      expect(test_class.is_truthy? 'false').to be false
-      expect(test_class.is_truthy? 'False').to be false
-      expect(test_class.is_truthy? 'FALSE').to be false
-      expect(test_class.is_truthy? 'f').to be false
-      expect(test_class.is_truthy? 'F').to be false
-      expect(test_class.is_truthy? 'no').to be false
-      expect(test_class.is_truthy? 'No').to be false
-      expect(test_class.is_truthy? 'NO').to be false
-      expect(test_class.is_truthy? 'n').to be false
-      expect(test_class.is_truthy? 'N').to be false
-      expect(test_class.is_truthy? '0').to be false
-      expect(test_class.is_truthy? 'xyz').to be false
+      expect(described_class.is_truthy? 'false').to be false
+      expect(described_class.is_truthy? 'False').to be false
+      expect(described_class.is_truthy? 'FALSE').to be false
+      expect(described_class.is_truthy? 'f').to be false
+      expect(described_class.is_truthy? 'F').to be false
+      expect(described_class.is_truthy? 'no').to be false
+      expect(described_class.is_truthy? 'No').to be false
+      expect(described_class.is_truthy? 'NO').to be false
+      expect(described_class.is_truthy? 'n').to be false
+      expect(described_class.is_truthy? 'N').to be false
+      expect(described_class.is_truthy? '0').to be false
+      expect(described_class.is_truthy? 'xyz').to be false
 
-      expect(test_class.is_truthy? 'true').to be true
-      expect(test_class.is_truthy? 'True').to be true
-      expect(test_class.is_truthy? 'TRUE').to be true
-      expect(test_class.is_truthy? 't').to be true
-      expect(test_class.is_truthy? 'T').to be true
-      expect(test_class.is_truthy? 'yes').to be true
-      expect(test_class.is_truthy? 'Yes').to be true
-      expect(test_class.is_truthy? 'YES').to be true
-      expect(test_class.is_truthy? 'y').to be true
-      expect(test_class.is_truthy? 'Y').to be true
-      expect(test_class.is_truthy? '1').to be true
+      expect(described_class.is_truthy? 'true').to be true
+      expect(described_class.is_truthy? 'True').to be true
+      expect(described_class.is_truthy? 'TRUE').to be true
+      expect(described_class.is_truthy? 't').to be true
+      expect(described_class.is_truthy? 'T').to be true
+      expect(described_class.is_truthy? 'yes').to be true
+      expect(described_class.is_truthy? 'Yes').to be true
+      expect(described_class.is_truthy? 'YES').to be true
+      expect(described_class.is_truthy? 'y').to be true
+      expect(described_class.is_truthy? 'Y').to be true
+      expect(described_class.is_truthy? '1').to be true
     end
 
     it "detects nil" do
-      expect(test_class.is_truthy? nil).to be false
+      expect(described_class.is_truthy? nil).to be false
     end
   end
 
   describe ".coerce_objects" do
-    subject { test_class.coerce_objects objects_to_coerce, to: TestCoercedObject, via: :tag }
+    subject { described_class.coerce_objects objects_to_coerce, to: TestCoercedObject, via: :tag }
 
     context "passed a nil object" do
       let(:objects_to_coerce) { nil }

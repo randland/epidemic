@@ -2,118 +2,13 @@ require 'spec_helper'
 
 describe Epidemic::Gamestate do
   let(:test_obj) { Epidemic::Gamestate.new options }
-  let(:default_options) { {} }
+  default_options = {}
 
-  describe '#max_outbreaks' do
-    subject { test_obj.max_outbreaks }
-
-    context 'when not passed any overrides' do
-      let(:options) { default_options.except :max_outbreaks }
-
-      it 'defaults to 7' do
-        expect(subject).to eq 7
-      end
-    end
-
-    context 'when passed an override as an integer' do
-      let(:options) { default_options.merge max_outbreaks: 2 }
-
-      it 'accepts the override' do
-        expect(subject).to eq 2
-      end
-    end
-
-    context 'when passed an override as a string' do
-      let(:options) { default_options.merge max_outbreaks: '2' }
-
-      it 'accepts the override and coerces it into an integer' do
-        expect(subject).to eq 2
-      end
-    end
-  end
-
-  describe '#outbreaks' do
-    subject { test_obj.outbreaks }
-
-    context 'when not passed any overrides' do
-      let(:options) { default_options.except :outbreaks }
-
-      it 'defaults to 0' do
-        expect(subject).to eq 0
-      end
-    end
-
-    context 'when passed an override as an integer' do
-      let(:options) { default_options.merge outbreaks: 2 }
-
-      it 'accepts the override' do
-        expect(subject).to eq 2
-      end
-    end
-
-    context 'when passed an override as a string' do
-      let(:options) { default_options.merge outbreaks: '2' }
-
-      it 'accepts the override and coerces it into an integer' do
-        expect(subject).to eq 2
-      end
-    end
-  end
-
-  describe '#total_epidemics' do
-    subject { test_obj.total_epidemics }
-
-    context 'when not passed any overrides' do
-      let(:options) { default_options.except :total_epidemics }
-
-      it 'defaults to 5' do
-        expect(subject).to eq 5
-      end
-    end
-
-    context 'when passed an override as an integer' do
-      let(:options) { default_options.merge total_epidemics: 2 }
-
-      it 'accepts the override' do
-        expect(subject).to eq 2
-      end
-    end
-
-    context 'when passed an override as a string' do
-      let(:options) { default_options.merge total_epidemics: '2' }
-
-      it 'accepts the override and coerces it into an integer' do
-        expect(subject).to eq 2
-      end
-    end
-  end
-
-  describe '#played_epidemics' do
-    subject { test_obj.played_epidemics }
-
-    context 'when not passed any overrides' do
-      let(:options) { default_options.except :played_epidemics }
-
-      it 'defaults to 0' do
-        expect(subject).to eq 0
-      end
-    end
-
-    context 'when passed an override as an integer' do
-      let(:options) { default_options.merge played_epidemics: 2 }
-
-      it 'accepts the override' do
-        expect(subject).to eq 2
-      end
-    end
-
-    context 'when passed an override as a string' do
-      let(:options) { default_options.merge played_epidemics: '2' }
-
-      it 'accepts the override and coerces it into an integer' do
-        expect(subject).to eq 2
-      end
-    end
+  with_options default_options: default_options do |obj|
+    obj.it_behaves_like 'it has integer property', :max_outbreaks, default: 7
+    obj.it_behaves_like 'it has integer property', :outbreaks, default: 0
+    obj.it_behaves_like 'it has integer property', :total_epidemics, default: 5
+    obj.it_behaves_like 'it has integer property', :played_epidemics, default: 0
   end
 
   describe "#cities" do
