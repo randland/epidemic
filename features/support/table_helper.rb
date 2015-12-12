@@ -1,20 +1,33 @@
 module TableHelper
-  def table_to_hash(table, key_field=nil)
-    hash = {}
-    tmp_tbl = table.dup
-    columns = tmp_tbl.shift.map {|title| title.downcase.gsub(/\W+/, '_')}
-    key_field ||= columns.first
-    tmp_tbl.each do |row|
-      this_hash = {}
-      this_key = nil
-      row.each_with_index do |val, idx|
-        column = columns[idx]
-        this_key = val if column == key_field
-        this_hash[column] = val
-      end
-      hash[this_key] = this_hash
+  def parse_table(table, keyed_on:nil)
+    Parser.new(table, keyed_on: keyed_on).parsed_result
+  end
+
+  class Parser
+    attr_accessor :table, :columns, :key_field
+
+    def initialize(table, keyed_on:nil)
+      self.table = table.try(:raw) || table.dup
+      self.columns = self.table.shift.map &:snakify
+      self.key_field = keyed_on || columns.first
     end
-    hash
+
+    def parsed_result
+      table.inject(Hashie::Mash.new) do |memo, row|
+        memo.merge extract_row row
+      end
+    end
+
+    private
+
+    def extract_row(row)
+      key = nil
+      attrs = columns.zip(row).inject(Hashie::Mash.new) do |memo, (field, val)|
+        key = val if field == key_field
+        memo.merge field => val
+      end
+      {key => attrs}
+    end
   end
 end
 

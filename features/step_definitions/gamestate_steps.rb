@@ -4,7 +4,7 @@ end
 
 Then(/^the current gamestate should have the following ([^\W]*?):$/) do |attribute_name, table|
   actual = @gamestate.send attribute_name
-  expected = table_to_hash table.raw
+  expected = parse_table table
 
   if actual.respond_to? :count
     expect(actual.count).to eq expected.count
