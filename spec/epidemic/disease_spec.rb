@@ -4,11 +4,11 @@ describe Epidemic::Disease do
   let(:test_obj) { Epidemic::Disease.new options }
   let(:default_options) { { color: :blue } }
 
-  context '#color' do
+  describe '#color' do
     subject { test_obj.color }
 
     context 'when not passed a color attribute' do
-      let(:options) { {} }
+      let(:options) { default_options.except :color }
 
       it 'does not allow a nil color attribute' do
         expect {subject}.to raise_error(ArgumentError)
@@ -16,7 +16,7 @@ describe Epidemic::Disease do
     end
 
     context 'when passed a color attribute as a symbol' do
-      let(:options) { {color: :blue} }
+      let(:options) { default_options.merge color: :blue }
 
       it 'accepts the color attribute' do
         expect(subject).to eq :blue
@@ -24,7 +24,7 @@ describe Epidemic::Disease do
     end
 
     context 'when passed a color attribute as a string' do
-      let(:options) { {color: 'blue'} }
+      let(:options) { default_options.merge color: 'blue' }
 
       it 'accepts the color attribute, and coerces it to a symbol' do
         expect(subject).to eq :blue
@@ -32,11 +32,11 @@ describe Epidemic::Disease do
     end
   end
 
-  context '#available' do
+  describe '#available' do
     subject { test_obj.available }
 
     context 'when not passed an available attribute' do
-      let(:options) { default_options }
+      let(:options) { default_options.except :available }
 
       it 'defaults to 24 available' do
         expect(subject).to eq 24
@@ -68,11 +68,11 @@ describe Epidemic::Disease do
     end
   end
 
-  context '#cured' do
+  describe '#cured' do
     subject { test_obj.cured }
 
     context 'when not passed a cured attribute' do
-      let(:options) { default_options }
+      let(:options) { default_options.except :cured }
 
       it 'defaults to false' do
         expect(subject).to be false
@@ -120,11 +120,11 @@ describe Epidemic::Disease do
     end
   end
 
-  context '#eradicated' do
+  describe '#eradicated' do
     subject { test_obj.eradicated }
 
     context 'when not passed a eradicated attribute' do
-      let(:options) { default_options }
+      let(:options) { default_options.except :eradicated }
 
       it 'defaults to false' do
         expect(subject).to be false

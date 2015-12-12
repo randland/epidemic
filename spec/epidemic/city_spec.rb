@@ -4,11 +4,11 @@ describe Epidemic::City do
   let(:test_obj) { Epidemic::City.new options }
   let(:default_options) { { tag: :new_jersey, color: :blue } }
 
-  context '#tag' do
+  describe '#tag' do
     subject { test_obj.tag }
 
     context 'when not passed a tag attribute' do
-      let(:options) { default_options.reject {|k,v| k == :tag} }
+      let(:options) { default_options.except :tag }
 
       it 'does not allow a nil tag attribute' do
         expect {subject}.to raise_error(ArgumentError)
@@ -32,11 +32,11 @@ describe Epidemic::City do
     end
   end
 
-  context '#color' do
+  describe '#color' do
     subject { test_obj.color }
 
     context 'when not passed a color attribute' do
-      let(:options) { default_options.reject {|k,v| k == :color} }
+      let(:options) { default_options.except :color }
 
       it 'does not allow a nil color attribute' do
         expect {subject}.to raise_error(ArgumentError)
@@ -60,11 +60,11 @@ describe Epidemic::City do
     end
   end
 
-  context '#name' do
+  describe '#name' do
     subject { test_obj.name }
 
     context 'when not passed a name attribute' do
-      let(:options) { default_options }
+      let(:options) { default_options.except :name }
 
       it 'determines an appropriate name based on the tag' do
         expect(subject).to eq 'New Jersey'

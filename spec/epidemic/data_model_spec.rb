@@ -7,7 +7,7 @@ end
 
 describe Epidemic::DataModel do
   let(:test_class) { Epidemic::DataModel }
-  context ".is_truthy?" do
+  describe ".is_truthy?" do
     it "detects booleans" do
       expect(test_class.is_truthy? false).to be false
 
@@ -56,7 +56,7 @@ describe Epidemic::DataModel do
     end
   end
 
-  context ".coerce_objects" do
+  describe ".coerce_objects" do
     subject { test_class.coerce_objects objects_to_coerce, to: TestCoercedObject, via: :tag }
 
     context "passed a nil object" do
@@ -152,6 +152,5 @@ describe Epidemic::DataModel do
         end
       end
     end
-
   end
 end
