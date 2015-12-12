@@ -60,6 +60,62 @@ describe Epidemic::Gamestate do
     end
   end
 
+  describe '#total_epidemics' do
+    subject { test_obj.total_epidemics }
+
+    context 'when not passed any overrides' do
+      let(:options) { default_options.except :total_epidemics }
+
+      it 'defaults to 5' do
+        expect(subject).to eq 5
+      end
+    end
+
+    context 'when passed an override as an integer' do
+      let(:options) { default_options.merge total_epidemics: 2 }
+
+      it 'accepts the override' do
+        expect(subject).to eq 2
+      end
+    end
+
+    context 'when passed an override as a string' do
+      let(:options) { default_options.merge total_epidemics: '2' }
+
+      it 'accepts the override and coerces it into an integer' do
+        expect(subject).to eq 2
+      end
+    end
+  end
+
+  describe '#played_epidemics' do
+    subject { test_obj.played_epidemics }
+
+    context 'when not passed any overrides' do
+      let(:options) { default_options.except :played_epidemics }
+
+      it 'defaults to 0' do
+        expect(subject).to eq 0
+      end
+    end
+
+    context 'when passed an override as an integer' do
+      let(:options) { default_options.merge played_epidemics: 2 }
+
+      it 'accepts the override' do
+        expect(subject).to eq 2
+      end
+    end
+
+    context 'when passed an override as a string' do
+      let(:options) { default_options.merge played_epidemics: '2' }
+
+      it 'accepts the override and coerces it into an integer' do
+        expect(subject).to eq 2
+      end
+    end
+  end
+
   describe "#cities" do
     subject { test_obj.cities }
 

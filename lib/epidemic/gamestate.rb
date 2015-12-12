@@ -10,6 +10,13 @@ module Epidemic
       default: 0,
       coerce: Integer
 
+    property :total_epidemics,
+      default: 5,
+      coerce: Integer
+    property :played_epidemics,
+      default: 0,
+      coerce: Integer
+
     property :diseases,
       default: load_yaml_config('diseases'),
       coerce: ->(val) { coerce_objects val, to: Disease, via: :color }
