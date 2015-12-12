@@ -153,3 +153,5 @@ Feature: Gamestate initialization
       | seoul            | tokyo            |
       | shanghai         | taipei           |
       | shanghai         | tokyo            |
+    And the current gamestate should have 7 max outbreaks
+    And the current gamestate should have 0 outbreaks

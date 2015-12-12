@@ -3,6 +3,13 @@ require 'epidemic/disease'
 
 module Epidemic
   class Gamestate < DataModel
+    property :max_outbreaks,
+      default: 7,
+      coerce: Integer
+    property :outbreaks,
+      default: 0,
+      coerce: Integer
+
     property :diseases,
       default: load_yaml_config('diseases'),
       coerce: ->(val) { coerce_objects val, to: Disease, via: :color }

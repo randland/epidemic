@@ -27,3 +27,13 @@ Then(/^the current gamestate should have the following cities connected:$/) do |
     expect(@gamestate.cities_connected_to city2).to include city1.to_sym
   end
 end
+
+Then(/^the current gamestate should have (\d+) (.*)$/) do |qty, attr_name|
+  val = @gamestate.send(attr_name.gsub /\W+/, '_')
+  case val
+  when Integer then expect(val).to eq qty.to_i
+  when String then expect(val).to eq qty.to_s
+  when Symbol then expect(val).to eq qty.to_sym
+  else expect(val.count).to eq qty.to_i
+  end
+end
