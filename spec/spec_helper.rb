@@ -24,8 +24,9 @@ end
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'epidemic'
 
-require_relative './support/property_assignment_matcher'
-require_relative './support/property_assignment_shared_examples'
+support_path = File.expand_path('../support', __FILE__)
+require_dir '', from: support_path
+
 
 RSpec.configure do |c|
   c.include PropertyMatcherHelpers

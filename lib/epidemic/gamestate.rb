@@ -1,3 +1,4 @@
+require 'epidemic/data_model'
 require 'epidemic/city'
 require 'epidemic/disease'
 
