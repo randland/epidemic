@@ -36,8 +36,8 @@ property_types = {
     override: true,
     coercions: { 1 => true,
                  0 => false,
-                 'y' => true,
-                 'n' => false }
+                 'true' => true,
+                 'false' => false }
   },
   integer: {
     override: 17,

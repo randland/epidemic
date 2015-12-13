@@ -26,7 +26,7 @@ module Epidemic
       coerce: ->(val) { coerce_objects val, to: City, via: :tag }
 
     def cities_connected_to(city)
-      cities[city].connections
+      cities.slice *cities[city].connections
     end
   end
 end

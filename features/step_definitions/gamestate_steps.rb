@@ -23,17 +23,17 @@ end
 Then(/^the current gamestate should have the following cities connected:$/) do |table|
   connections = table.raw
   connections.each do |city1, city2|
-    expect(@gamestate.cities_connected_to city1).to include city2.to_sym
-    expect(@gamestate.cities_connected_to city2).to include city1.to_sym
+    expect(@gamestate.cities_connected_to(city1).keys).to include city2
+    expect(@gamestate.cities_connected_to(city2).keys).to include city1
   end
 end
 
-Then(/^the current gamestate should have (\d+) (.*)$/) do |qty, attr_name|
-  val = @gamestate.send(attr_name.gsub /\W+/, '_')
+Then(/^the current gamestate should have ([\d.]+) (.*)$/) do |qty, attr_name|
+  val = @gamestate.send attr_name.snakify
   case val
   when Integer then expect(val).to eq qty.to_i
   when String then expect(val).to eq qty.to_s
   when Symbol then expect(val).to eq qty.to_sym
-  else expect(val.count).to eq qty.to_i
+  else expect(val.count).to eq qty.to_f
   end
 end

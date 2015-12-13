@@ -20,6 +20,7 @@ module Epidemic
       case val
       when Array then coerce_objects_from_array val, to: to, via: via
       when Hash then coerce_objects_from_hash val, to: to, via: via
+      when String then coerce_objects_from_hash load_yaml_config(val), to: to, via: via
       else empty_coerced_object
       end
     end

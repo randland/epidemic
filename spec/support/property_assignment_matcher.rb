@@ -3,7 +3,8 @@ require 'rspec/expectations'
 RSpec::Matchers.define :default_property do |property|
   match do |klass|
     @options ||= {}
-    klass.new(@options.except property).send(property) == @val
+    @actual = klass.new(@options.except property).send(property)
+    @actual == @val
   end
 
   chain :to do |val|
@@ -15,13 +16,15 @@ RSpec::Matchers.define :default_property do |property|
   end
 
   failure_message do |actual|
-    "expected that #{actual} should have property #{expected} defaulted to #{@val}"
+    "expected #{actual} to have property :#{expected} defaulted to #{@val} but found #{@actual}"
   end
 end
 
 RSpec::Matchers.define :allow_override_of do |property|
   match do |klass|
-    klass.new(@options.merge property => @val).send(property) == @val
+    @options ||= {}
+    @actual = klass.new(@options.merge property => @val).send(property)
+    @actual == @val
   end
 
   chain :to do |val|
@@ -33,13 +36,14 @@ RSpec::Matchers.define :allow_override_of do |property|
   end
 
   failure_message do |actual|
-    "expected that #{actual} should allow override of property #{expected} to #{@val}"
+    "expected #{actual} to allow override of property #{expected} to #{@val} but found #{@actual}"
   end
 end
 
 RSpec::Matchers.define :coerce_override_of do |property|
   match do |klass|
-    klass.new(@options.merge property => @override).send(property) == @val
+    @actual = klass.new(@options.merge property => @override).send(property)
+    @actual == @val
   end
 
   chain :from do |val|
@@ -55,13 +59,15 @@ RSpec::Matchers.define :coerce_override_of do |property|
   end
 
   failure_message do |actual|
-    "expected that #{actual} should allow override of property #{expected} to #{@val} from #{@override}"
+    "expected #{actual} to coerce property #{expected} to #{@val} from #{@override} but found #{@actual}"
   end
 end
 
 module PropertyMatcherHelpers
   def expect_attribute_required(attr, default_options={})
-    expect {described_class.new default_options.merge(attr => nil)}.to raise_error(ArgumentError)
+    expect do
+      described_class.new default_options.merge attr => nil
+    end.to raise_error(ArgumentError)
   end
 
   def expect_attribute_default(attr, default, default_options={})
@@ -73,7 +79,9 @@ module PropertyMatcherHelpers
   end
 
   def expect_attribute_coercion(attr, override_hash, default_options={})
-    expect(described_class).to coerce_override_of(attr).from(override_hash.keys.first).to(override_hash.values.first).when_initialized_with default_options
+    override_hash.each do |from, to|
+      expect(described_class).to coerce_override_of(attr).from(from).to(to).when_initialized_with default_options
+    end
   end
 end
 
