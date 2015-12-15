@@ -18,6 +18,14 @@ module Epidemic
       default: 0,
       coerce: Integer
 
+    property :infection_rates,
+      default: [2, 2, 2, 3, 3, 4, 4],
+      coerce: Array[Integer]
+
+    def infection_rate
+      infection_rates[played_epidemics || 0]
+    end
+
     property :diseases,
       default: load_yaml_config('diseases'),
       coerce: ->(val) { coerce_objects val, to: Disease, via: :color }

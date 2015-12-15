@@ -5,7 +5,7 @@ module Epidemic
     private
 
     def self.load_yaml_config(filename)
-      YAML.load_file(File.expand_path("../../../config/#{filename}.yml", __FILE__))
+      ::Epidemic::ConfigLoader.load_yaml_config filename
     end
 
     def self.is_truthy?(val)
@@ -44,6 +44,13 @@ module Epidemic
       hash.inject(empty_coerced_object) do |memo, (key, obj)|
         memo.merge key => to.new(obj.merge via => key)
       end
+    end
+  end
+
+  class ConfigLoader
+    @@loaded_configs = {}
+    def self.load_yaml_config(filename)
+      @@loaded_configs[filename] ||= YAML.load_file(File.expand_path("../../../config/#{filename}.yml", __FILE__))
     end
   end
 end

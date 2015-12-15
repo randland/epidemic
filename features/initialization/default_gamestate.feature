@@ -2,15 +2,35 @@ Feature: Gamestate initialization
   In order to start a new game of Epidemic
   I should be able to instantiate a default game
 
-  Scenario: Default game
+  Background: Default game
     Given I have a new default gamestate
+
+  Scenario: Outbreak status
+    Then the current gamestate should have 7 max outbreaks
+    And the current gamestate should have 0 outbreaks
+
+  Scenario: Epidemic status
+    Then the current gamestate should have 5 total epidemics
+    And the current gamestate should have 0 played epidemics
+
+  Scenario: Infection rate
+    Then the current gamestate should have the following infection rates:
+      | 2 | 2 | 2 | 3 | 3 | 4 | 4 |
+    And the current gamestate should have an infection rate of 2
+
+    When the current gamestate has 3 played epidemics
+    Then the current gamestate should have an infection rate of 3
+
+  Scenario: Default diseases
     Then the current gamestate should have the following diseases:
       | Color  | Available | Cured | Eradicated |
       | black  | 24        | false | false      |
       | blue   | 24        | false | false      |
       | red    | 24        | false | false      |
       | yellow | 24        | false | false      |
-    And the current gamestate should have the following cities:
+
+  Scenario: Default cities
+    Then the current gamestate should have the following cities:
       | Tag              | Color  | Name             |
       | algiers          | black  | Algiers          |
       | atlanta          | blue   | Atlanta          |
@@ -153,7 +173,4 @@ Feature: Gamestate initialization
       | seoul            | tokyo            |
       | shanghai         | taipei           |
       | shanghai         | tokyo            |
-    And the current gamestate should have 7 max outbreaks
-    And the current gamestate should have 0 outbreaks
-    And the current gamestate should have 5 total epidemics
-    And the current gamestate should have 0 played epidemics
+

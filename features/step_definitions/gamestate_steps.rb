@@ -2,6 +2,10 @@ Given(/^I have a new default gamestate$/) do
   @gamestate = Epidemic::Factories::GamestateFactory.create_game
 end
 
+When(/^the current gamestate has ([\d.]+) (.*)$/) do |val, attr_name|
+  @gamestate.send "#{attr_name.snakify}=", val.to_f
+end
+
 Then(/^the current gamestate should have the following ([^\W]*?):$/) do |attribute_name, table|
   actual = @gamestate.send attribute_name
   expected = parse_table table
@@ -36,4 +40,12 @@ Then(/^the current gamestate should have ([\d.]+) (.*)$/) do |qty, attr_name|
   when Symbol then expect(val).to eq qty.to_sym
   else expect(val.count).to eq qty.to_f
   end
+end
+
+Then(/^the current gamestate should have the following infection rates:$/) do |table|
+  expect(@gamestate.send :infection_rates).to eq table.raw.first.map(&:to_i)
+end
+
+Then(/^the current gamestate should have an? (.+) of (\d+)$/) do |attr_name, qty|
+  step "the current gamestate should have #{qty} #{attr_name}"
 end
