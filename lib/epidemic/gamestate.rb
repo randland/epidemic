@@ -1,9 +1,11 @@
 require 'epidemic/data_model'
 require_dir 'epidemic/infection_behaviors'
+require_dir 'epidemic/card_draw_behaviors'
 require 'epidemic/city'
 require 'epidemic/disease'
 require 'epidemic/infection_card'
 require 'epidemic/player_card'
+require 'epidemic/player'
 
 module Epidemic
   class Gamestate < DataModel
@@ -56,6 +58,22 @@ module Epidemic
     property :player_discard,
       default: [],
       coerce: Array[PlayerCard]
+
+    property :players,
+      default: [],
+      coerce: Array[Player]
+
+    property :turn,
+      default: 0,
+      coerce: Integer
+
+    property :actions_used,
+      default: 0,
+      coerce: Integer
+
+    def current_player
+      players.values[turn % players.count]
+    end
   end
 end
 

@@ -15,3 +15,4 @@ module Epidemic
     end
   end
 end
+
