@@ -1,6 +1,8 @@
 require 'epidemic/data_model'
+require_dir 'epidemic/infection_behaviors'
 require 'epidemic/city'
 require 'epidemic/disease'
+require 'epidemic/infection_card'
 
 module Epidemic
   class Gamestate < DataModel
@@ -25,6 +27,14 @@ module Epidemic
     def infection_rate
       infection_rates[played_epidemics || 0]
     end
+
+    property :infection_deck,
+      default: [],
+      coerce: Array[InfectionCard]
+
+    property :infection_discard,
+      default: [],
+      coerce: Array[InfectionCard]
 
     property :diseases,
       default: load_yaml_config('diseases'),

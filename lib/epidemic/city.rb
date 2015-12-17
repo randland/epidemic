@@ -18,6 +18,17 @@ module Epidemic
     def name
       self[:name] ||= tag.to_s.titleize
     end
+
+    property :infections,
+      default: {},
+      coerce: Hash[Symbol => Integer]
+
+    property :infection_behavior,
+      coerce: ->(val) { coerce_class val }
+
+    def infection_behavior
+      self[:infection_behavior] || DefaultCityInfectionBehavior
+    end
   end
 end
 

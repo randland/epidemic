@@ -1,5 +1,15 @@
 class Hash
-  def deep_includes? sub_hash
+  include Epidemic::Extensions::CloneHelpers
+
+  def deep_clone
+    my_clone = self.clone
+    my_clone.each do |key, val|
+      my_clone[key] = clone_val val
+    end
+    my_clone
+  end
+
+  def deep_includes?(sub_hash)
     sub_hash.all? do |key, val|
       if val.respond_to? :deep_includes?
         self[key].deep_includes? val
@@ -16,7 +26,7 @@ class Hash
       end
     end
   end
-  
+
   def deep_diff(b)
     a = self
     (a.keys | b.keys).inject({}) do |diff, k|
@@ -31,3 +41,4 @@ class Hash
     end
   end
 end
+

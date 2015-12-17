@@ -8,6 +8,9 @@ module Epidemic
       ::Epidemic::ConfigLoader.load_yaml_config filename
     end
 
+    def self.coerce_class(val)
+      val.try(:constantize) || val
+    end
     def self.is_truthy?(val)
       case val
       when String then !!(val =~ /^(true|t|yes|y|1)$/i)

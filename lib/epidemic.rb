@@ -15,5 +15,6 @@ end
 
 require_dir "epidemic/extensions"
 require_dir "epidemic/factories"
+require_dir "epidemic/services"
 require "epidemic/gamestate"
 

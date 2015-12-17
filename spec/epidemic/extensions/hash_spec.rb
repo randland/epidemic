@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Hash do
+  describe "#deep_clone" do
+    it "clones keys and values" do
+      orig = {a: 1, 'b' => '2'}
+      clone = orig.deep_clone
+
+      expect(clone[:a]).to eq 1
+      expect(clone['b']).to eq '2'
+    end
+  end
+
   describe "#deep_includes?" do
     it "looks for shallow matches" do
       search = {a: 1, b: 2}
