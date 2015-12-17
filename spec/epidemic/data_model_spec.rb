@@ -5,6 +5,18 @@ class TestCoercedObject < Epidemic::DataModel
   property :name
 end
 
+class TestClonedChild < Epidemic::DataModel
+  property :val,
+    coerce: String
+end
+
+class TestClonedParent < Epidemic::DataModel
+  property :children,
+    coerce: Array[TestClonedChild]
+  property :coerced_children,
+    coerce: ->(val) { coerce_objects val, to: TestClonedChild, via: :val }
+end
+
 def expect_truthy(val)
   expect(described_class.is_truthy? val).to be true
 end
@@ -14,6 +26,42 @@ def expect_falsey(val)
 end
 
 describe Epidemic::DataModel do
+  describe "#deep_clone" do
+    let(:original) do
+      TestClonedParent.new children: [
+        {val: 'foo'},
+        {val: 'bar'}
+      ], coerced_children: {
+        foo: {},
+        bar: {}
+      }
+    end
+
+    let(:clone) { original.deep_clone }
+
+    it "creates an equal object" do
+      expect(clone).to eq original
+    end
+
+    it "creates a new object" do
+      expect(clone.object_id).to_not eq original.object_id
+    end
+
+    it "clones children" do
+      expect(clone.children.object_id).to_not eq original.children.object_id
+    end
+
+    it "does not propegate subsequent changes to array children" do
+      clone.children.first.val = "baz"
+      expect(clone.children.first.val).to_not eq original.children.first.val
+    end
+
+    it "does not propegate subsequent changes to hash children" do
+      clone.coerced_children.values.first.val = "baz"
+      expect(clone.coerced_children.values.first.val).to_not eq original.coerced_children.values.first.val
+    end
+  end
+
   describe ".is_truthy?" do
     it "detects booleans" do
       expect_truthy true

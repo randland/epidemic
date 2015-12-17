@@ -13,7 +13,9 @@ def require_dir(dir, from:File.expand_path('../', __FILE__))
   end
 end
 
+require "epidemic/data_model"
 require_dir "epidemic/extensions"
 require_dir "epidemic/factories"
+require_dir "epidemic/services"
 require "epidemic/gamestate"
 

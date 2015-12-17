@@ -2,8 +2,6 @@ module Epidemic
   class DataModel < Hashie::Dash
     include Hashie::Extensions::Dash::Coercion
 
-    private
-
     def self.load_yaml_config(filename)
       ::Epidemic::ConfigLoader.load_yaml_config filename
     end
@@ -14,6 +12,10 @@ module Epidemic
       when Numeric then !([-1,0].include? val.to_i)
       else val == true
       end
+    end
+
+    def self.coerce_class(val)
+      val.try(:constantize) || val
     end
 
     def self.coerce_objects(val, to: Hashie::Mash, via: :tag)

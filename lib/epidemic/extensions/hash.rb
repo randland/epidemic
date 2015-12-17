@@ -1,4 +1,12 @@
 class Hash
+  def deep_clone
+    my_clone = self.clone
+    my_clone.keys.each do |key|
+      my_clone[key] = clone_value key
+    end
+    my_clone
+  end
+
   def deep_includes? sub_hash
     sub_hash.all? do |key, val|
       if val.respond_to? :deep_includes?
@@ -16,7 +24,7 @@ class Hash
       end
     end
   end
-  
+
   def deep_diff(b)
     a = self
     (a.keys | b.keys).inject({}) do |diff, k|
@@ -28,6 +36,23 @@ class Hash
         end
       end
       diff
+    end
+  end
+
+  private
+
+  def clone_value(key)
+    orig = self[key]
+    begin
+      if orig.respond_to? :deep_clone
+        orig.deep_clone
+      elsif orig.is_a? Class
+        orig
+      else
+        orig.clone
+      end
+    rescue TypeError
+      orig
     end
   end
 end
