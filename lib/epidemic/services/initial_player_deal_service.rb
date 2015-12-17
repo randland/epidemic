@@ -7,7 +7,7 @@ module Epidemic
 
       def self.execute!(gamestate)
         gamestate.players.each_index do |idx|
-          Epidemic::Services::PlayerDrawService.draw! gamestate, 2, idx
+          PlayerDrawService.draw! gamestate, 2, idx
         end
         gamestate
       end

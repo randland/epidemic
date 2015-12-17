@@ -87,9 +87,9 @@ shared_examples_for "it has hash property" do |attr, options|
       end
     end
 
-    if options.has_key? :default_config
-      it "defaults to loading the values found at /config/#{options[:default_config]}.yml" do
-        expect_hash_attribute_default attr, options[:default_config], default_options
+    if options.has_key? :prototype
+      it "defaults to loading the values found at /config/#{options[:prototype]}.yml" do
+        expect_hash_attribute_default attr, options[:prototype], default_options
       end
     end
   end

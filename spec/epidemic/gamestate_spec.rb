@@ -12,12 +12,12 @@ describe Epidemic::Gamestate do
   it_behaves_like 'it has hash property', :cities,
     of_type: Epidemic::City,
     keyed_on: :tag,
-    default_config: 'cities',
+    prototype: 'cities',
     stubbed_attrs: {color: :black}
   it_behaves_like 'it has hash property', :diseases,
     of_type: Epidemic::Disease,
     keyed_on: :color,
-    default_config: 'diseases'
+    prototype: 'diseases'
 
   describe "#infection_rate" do
     subject { gamestate.infection_rate }

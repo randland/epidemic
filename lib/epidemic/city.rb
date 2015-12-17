@@ -23,12 +23,8 @@ module Epidemic
       default: {},
       coerce: Hash[Symbol => Integer]
 
-    property :infection_behavior,
-      coerce: ->(val) { coerce_class val }
-
-    def infection_behavior
-      self[:infection_behavior] || DefaultCityInfectionBehavior
-    end
+    class_property :infection_behavior,
+      default_class: DefaultCityInfectionBehavior
   end
 end
 

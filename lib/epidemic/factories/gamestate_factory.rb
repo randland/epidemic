@@ -51,7 +51,7 @@ module Epidemic
 
       def add_epidemics
         gamestate.player_deck = gamestate.player_deck.in_groups(gamestate.total_epidemics, false).collect do |pile|
-          pile << { draw_behavior: Epidemic::EpidemicCardDrawBehavior }
+          pile << { draw_behavior: EpidemicCardDrawBehavior }
           pile.shuffle
         end.flatten
       end

@@ -7,7 +7,7 @@ module Epidemic
 
       def self.execute!(gamestate)
         deck = gamestate.cities.collect do |tag, city|
-          Epidemic::InfectionCard.new city: tag, color: city.color
+          InfectionCard.new city: tag, color: city.color
         end.shuffle
         gamestate.infection_deck = deck
         gamestate

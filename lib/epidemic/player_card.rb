@@ -6,11 +6,7 @@ module Epidemic
     property :color,
       coerce: Symbol
 
-    property :draw_behavior,
-      coerce: ->(val) { coerce_class val }
-
-    def draw_behavior
-      self[:draw_behavior] || Epidemic::PlayerCardDrawBehavior
-    end
+    class_property :draw_behavior,
+      default_class: PlayerCardDrawBehavior
   end
 end

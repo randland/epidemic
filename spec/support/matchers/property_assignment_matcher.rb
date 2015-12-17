@@ -164,8 +164,8 @@ module PropertyMatcherHelpers
     expect(described_class).to default_property(attr).to(default).when_initialized_with default_options
   end
 
-  def expect_hash_attribute_default(attr, default_config, default_options={})
-    config = Epidemic::DataModel.load_yaml_config default_config
+  def expect_hash_attribute_default(attr, prototype, default_options={})
+    config = Epidemic::DataModel.load_prototype prototype
     expect(described_class).to default_hash_property(attr).to(config).when_initialized_with default_options
   end
 

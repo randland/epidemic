@@ -1,6 +1,7 @@
 require 'epidemic/data_model'
 require_dir 'epidemic/infection_behaviors'
 require_dir 'epidemic/card_draw_behaviors'
+require_dir 'epidemic/player_behaviors'
 require 'epidemic/city'
 require 'epidemic/disease'
 require 'epidemic/infection_card'
@@ -39,13 +40,13 @@ module Epidemic
       default: [],
       coerce: Array[InfectionCard]
 
-    property :diseases,
-      default: load_yaml_config('diseases'),
-      coerce: ->(val) { coerce_objects val, to: Disease, via: :color }
+    tagged_property :diseases,
+      prototype: 'diseases',
+      coerce: {color: Disease}
 
-    property :cities,
-      default: load_yaml_config('cities'),
-      coerce: ->(val) { coerce_objects val, to: City, via: :tag }
+    tagged_property :cities,
+      prototype: 'cities',
+      coerce: {tag: City}
 
     def cities_connected_to(city)
       cities.slice *cities[city].connections
