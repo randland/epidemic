@@ -1,5 +1,5 @@
 Given(/^I have a new default gamestate$/) do
-  @gamestate = Epidemic::Factories::GamestateFactory.create_game
+  @gamestate = Epidemic::Gamestate.new
 end
 
 When(/^the current gamestate has ([\d.]+) (.*)$/) do |val, attr_name|

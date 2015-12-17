@@ -3,6 +3,7 @@ require_dir 'epidemic/infection_behaviors'
 require 'epidemic/city'
 require 'epidemic/disease'
 require 'epidemic/infection_card'
+require 'epidemic/player_card'
 
 module Epidemic
   class Gamestate < DataModel
@@ -47,6 +48,14 @@ module Epidemic
     def cities_connected_to(city)
       cities.slice *cities[city].connections
     end
+
+    property :player_deck,
+      default: [],
+      coerce: Array[PlayerCard]
+
+    property :player_discard,
+      default: [],
+      coerce: Array[PlayerCard]
   end
 end
 
